@@ -1,64 +1,24 @@
-## users テーブル
+# README
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-| name     | string | null: false |
-| kana_name | string | null: false |
-| birthday | string | null: false |
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### Association
+Things you may want to cover:
 
-- has_many :items
-- has_many :orders
+* Ruby version
 
-## items テーブル
+* System dependencies
 
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| item_name   | string       | null: false |
-| text        | text         | null: false |
-| item_status | string       | null: false |
-| cost burden | string       | null: false |
-| user_area   | string       | null: false |
-| category    | string       | null: false |
-| delivery_time | string     | null: false |
-| price       | string       | null: false |
-| user        | references   | foreign_key: true |
+* Configuration
 
-### Association
+* Database creation
 
-- belongs_to :user
-- has_one :order 
- 
+* Database initialization
 
-## orders テーブル
+* How to run the test suite
 
-| Column | Type       | Options         |
-| ------ | ---------- | --------------- |
-| user   | references | foreign_key: true  |
-| item   | references | foreign_key: true  |
-| address | references| foreign_key: true  |
+* Services (job queues, cache servers, search engines, etc.)
 
-### Association
+* Deployment instructions
 
-- belongs_to :user
-- belongs_to :item
-
-
-## address テーブル
-
-| Column | Type       | Options         |
-| ------ | ---------- | --------------- |
-| address        | string    | null:false        |
-| phone number   | string    | null:false        |
-| order          | references| foreign_key: true |
-
-### Association
-
-- belongs_to :order
-
-
-
+* ...
