@@ -22,11 +22,11 @@
 | ------ | ------ | ----------- |
 | name        | string       | null: false |
 | text        | text         | null: false |
-| status_id   | string       | null: false |
-| cost_id     | string       | null: false |
-| area_id     | string       | null: false |
-| category_id | string       | null: false |
-| delivery_id | string       | null: false |
+| status_id   | integer      | null: false |
+| cost_id     | integer      | null: false |
+| area_id     | integer      | null: false |
+| category_id | integer      | null: false |
+| delivery_id | integer      | null: false |
 | price       | integer      | null: false |
 | user        | references   | foreign_key: true |
 
@@ -48,7 +48,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_many :address
+- has_one    :address
 
 
 ## address テーブル
@@ -56,7 +56,7 @@
 | Column | Type       | Options         |
 | ------ | ---------- | --------------- |
 | postal_code    | string    | null:false        |
-| area_id        | string    | null:false        |
+| area_id        | integer   | null:false        |
 | city           | string    | null:false        |
 | street         | string    | null:false        |
 | building       | string    |                   |
