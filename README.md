@@ -3,7 +3,7 @@
 | Column   | Type   | Options     |
 | -------- | ------ | ----------- |
 | nickname | string | null: false |
-| email    | string | unique: true |
+| email    | string | unique: true, null: false  |
 | encrypted_password | string | null: false |
 | myoji    | string | null: false |
 | namae | string | null: false |
@@ -20,14 +20,14 @@
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
-| item_name   | string       | null: false |
+| name        | string       | null: false |
 | text        | text         | null: false |
 | status_id   | string       | null: false |
 | cost_id     | string       | null: false |
 | area_id     | string       | null: false |
 | category_id | string       | null: false |
-| delivery_id | string     | null: false |
-| price_id    | string       | null: false |
+| delivery_id | string       | null: false |
+| price       | integer      | null: false |
 | user        | references   | foreign_key: true |
 
 ### Association
@@ -56,10 +56,10 @@
 | Column | Type       | Options         |
 | ------ | ---------- | --------------- |
 | postal_code    | string    | null:false        |
-| prefectural_id | string    | null:false        |
+| area_id        | string    | null:false        |
 | city           | string    | null:false        |
 | street         | string    | null:false        |
-| building       | string    | null:false        |
+| building       | string    |                   |
 | phone number   | string    | null:false        |
 | order          | references| foreign_key: true |
 
