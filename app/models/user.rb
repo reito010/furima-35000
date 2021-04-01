@@ -23,7 +23,7 @@ class User < ApplicationRecord
       validates :namae_kana
     end
    
-    with_options format: { with: /\A[ぁ-んァ-ン一-龥]/, message: '全角文字を使用してください' } do
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/, message: '全角文字を使用してください' } do
     validates :myoji
     validates :namae
     end

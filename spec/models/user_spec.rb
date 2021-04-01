@@ -139,5 +139,11 @@ RSpec.describe User, type: :model do
     @user.valid?
     expect(@user.errors.full_messages).to include
     end
+
+    it 'myoji 半角文字だと登録できない' do
+      @user.myoji = 'ﾀﾅｶ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include
+      end
   end
 end
