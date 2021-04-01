@@ -11,7 +11,7 @@
 | namae_kana | string | null: false |
 | birthday | date     | null: false |
 
-### Association　　
+### Association
 
 - has_many :items
 - has_many :orders
