@@ -31,9 +31,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'password_confirmationが空では登録できないこと' do
-       @user.password = ''
+       @user.password_confirmation = ''
        @user.valid?
-       expect(@user.errors.full_messages).to include("Password can't be blank", "Password confirmation doesn't match Password")
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   
     it 'myojiが空では登録できないこと' do
@@ -69,19 +69,19 @@ RSpec.describe User, type: :model do
     it 'password:半角英数混合(半角英語のみ)' do
     @user.password = 'aaaaaaa'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
 
     it 'password:半角英数混合(半角数字のみ)' do
     @user.password = '111111'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
    end
 
     it 'passwordが６文字未満' do
-    @user.password = '11111'
+    @user.password = '11a11'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
 
     it 'emailが@を含まない' do
@@ -101,49 +101,49 @@ RSpec.describe User, type: :model do
     @user.password = FactoryBot.build(:user)
     @user.password_confirmation = FactoryBot.build(:user)
     @user.valid?
-    expect(@user.errors[:email]).to include
+    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     
     it 'パスワード全角文字だと登録できない' do
     @user.password = '1q1q１q'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
 
     it 'myoji_kana 半角文字だと登録できない' do
     @user.myoji_kana = 'ﾔﾏﾀﾞ'
     @user.valid?
-    expect(@user.errors.full_messages).to include
+    expect(@user.errors.full_messages).to include("Myoji kana 全角文字を使用してください")
     end
 
     it 'namae_kana 半角文字だと登録できない' do
     @user.namae_kana = 'ﾀﾛｳ'
     @user.valid?
-    expect(@user.errors.full_messages).to include
+    expect(@user.errors.full_messages).to include("Namae kana 全角文字を使用してください")
     end
 
     it 'myoji_kana カタカナ以外の全角文字は登録できない' do
     @user.myoji_kana = 'やまだ'
     @user.valid?
-    expect(@user.errors.full_messages).to include
+    expect(@user.errors.full_messages).to include("Myoji kana 全角文字を使用してください")
     end
 
     it 'namae_kana カタカナ以外の全角文字は登録できない' do
     @user.namae_kana = 'たろう'
     @user.valid?
-    expect(@user.errors.full_messages).to include
+    expect(@user.errors.full_messages).to include("Namae kana 全角文字を使用してください")
     end
 
     it 'namae 半角文字だと登録できない' do
     @user.namae = 'ﾀﾛｳﾞ'
     @user.valid?
-    expect(@user.errors.full_messages).to include
+    expect(@user.errors.full_messages).to include("Namae 全角文字を使用してください")
     end
 
     it 'myoji 半角文字だと登録できない' do
-      @user.myoji = 'ﾀﾅｶ'
-      @user.valid?
-      expect(@user.errors.full_messages).to include
-      end
+    @user.myoji = 'ﾀﾅｶ'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Myoji 全角文字を使用してください")
+   end
   end
 end
