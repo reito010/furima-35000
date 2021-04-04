@@ -16,4 +16,6 @@ class Item < ApplicationRecord
   validates :cost_id, numericality: { other_than: 1 } 
   validates :area_id, numericality: { other_than: 1 } 
   validates :delivery_id, numericality: { other_than: 1 } 
+  
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than: 10000000}
 end
