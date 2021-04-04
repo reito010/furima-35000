@@ -62,12 +62,12 @@ RSpec.describe Item, type: :model do
        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "price(価格）の範囲が300未満の時" do
-        @item.price = '100'
+        @item.price = 100
        @item.valid?
        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it "price(価格）の範囲が10000000以上の時" do
-        @item.price = '100000000'
+        @item.price = 100000000
        @item.valid?
        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
@@ -75,6 +75,21 @@ RSpec.describe Item, type: :model do
         @item.user = nil
       @item.valid?
       expect(@item.errors.full_messages).to include('User must exist')
+      end
+      it "price(価格）の記入が全角文字の時" do
+        @item.price = 'あああああ'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "price(価格）の記入が半角英数混合では登録できない" do
+        @item.price = '1q1q1q'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "price(価格）の半角英語のみでは登録できない" do
+        @item.price = 'aaaaaa'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end

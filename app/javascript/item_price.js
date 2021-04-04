@@ -15,7 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
     tax.innerHTML =  priceTax;
     price.innerHTML = sum;
     
-    console.log(inputValue);
 
   })
 
