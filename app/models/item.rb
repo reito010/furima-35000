@@ -14,12 +14,13 @@ class Item < ApplicationRecord
 
   with_options numericality: { other_than: 1 } do
 
-  validates :category_id
-  validates :status_id
-  validates :cost_id
-  validates :area_id
-  validates :delivery_id 
+   validates :category_id
+   validates :status_id
+   validates :cost_id
+   validates :area_id
+   validates :delivery_id 
+  end
   
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than: 10000000}
-  end
+  
 end
