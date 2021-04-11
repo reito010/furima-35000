@@ -10,7 +10,7 @@ RSpec.describe OrderAddress, type: :model do
 
   describe '購入情報' do
     context '購入情報がうまくいくとき'
-      it "郵便番号・都道府県・市区町村・番地・電話番号が全てあるとき" do 
+      it "郵便番号・都道府県・市区町村・番地・建物 電話番号が全てあるとき" do 
            expect(@address).to be_valid
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
 
-      it "電話番号が11桁以内のとき" do
+      it "電話番号が11桁以上のとき" do
         @address.phone_number = '090123456789'
         @address.valid?
         expect(@address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
@@ -64,5 +64,23 @@ RSpec.describe OrderAddress, type: :model do
         expect(@address.errors.full_messages).to include("Token can't be blank")
       end
 
+      it "item_idが空のとき登録できない" do
+        @address.item_id = nil
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "user_idが空のとき登録できない" do
+        @address.user_id = nil
+        @address.valid?
+        expect(@address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "電話番号が数字以外のとき（英数字混合）登録できない" do
+        @address.phone_number = '111aaaaaa'
+        @address.valid?
+        binding.pry
+        expect(@address.errors.full_messages).to include("Phone number is invalid")
+      end
 
 end
