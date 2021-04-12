@@ -4,8 +4,12 @@ class OrdersController < ApplicationController
   before_action :move_to_index, only: [:index, :create]
 
   def index
+    if @item.order.present?
+      redirect_to root_path
+    end
     @order_address = OrderAddress.new
   end
+    
 
   def create
     @order_address = OrderAddress.new(order_params)

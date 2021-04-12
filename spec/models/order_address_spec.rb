@@ -13,6 +13,10 @@ RSpec.describe OrderAddress, type: :model do
       it "郵便番号・都道府県・市区町村・番地・建物 電話番号が全てあるとき" do 
            expect(@address).to be_valid
       end
+
+      it "建物が空白のとき" do 
+        expect(@address).to be_valid
+   end
     end
 
     context '購入情報がうまくいかないとき'
@@ -79,7 +83,6 @@ RSpec.describe OrderAddress, type: :model do
       it "電話番号が数字以外のとき（英数字混合）登録できない" do
         @address.phone_number = '111aaaaaa'
         @address.valid?
-        binding.pry
         expect(@address.errors.full_messages).to include("Phone number is invalid")
       end
 
