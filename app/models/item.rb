@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :delivery
 
 
-  validates :name, :text, :price, presence: true
+  validates :name, :text, :price, :image, presence: true
 
 
   with_options numericality: { other_than: 1 } do
